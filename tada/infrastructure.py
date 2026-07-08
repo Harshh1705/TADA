@@ -123,7 +123,7 @@ def _check_compliance(company_name: str, training_infra: list[InfraFinding], reg
 
 
 def analyze_infrastructure(company_name: str, tracer: Tracer) -> InfrastructureReport:
-    tracer.step(f"infrastructure flight check for: {company_name}")
+    tracer.debug(f"infrastructure flight check for: {company_name}")
 
     job_findings = _detect_infra_from_job_posts(company_name, tracer)
     github_findings = _detect_infra_from_github(company_name, tracer)
@@ -151,5 +151,5 @@ def analyze_infrastructure(company_name: str, tracer: Tracer) -> InfrastructureR
         checklist=checklist,
     )
 
-    tracer.ok(f"infrastructure check complete: {len(all_findings)} findings, {len(compliance)} compliance flags")
+    tracer.debug(f"infrastructure check complete: {len(all_findings)} findings, {len(compliance)} compliance flags")
     return report

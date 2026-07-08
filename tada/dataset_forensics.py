@@ -23,7 +23,7 @@ def _search_huggingface_datasets(query: str, max_results: int = 5) -> list[dict]
 
 
 def _find_similar_public_datasets(claimed_source: str, tracer: Tracer) -> list[PublicDataset]:
-    tracer.step(f"searching public datasets for: {claimed_source}")
+    tracer.debug(f"searching public datasets for: {claimed_source}")
     datasets: list[PublicDataset] = []
 
     hf_results = _search_huggingface_datasets(claimed_source, max_results=5)
@@ -53,7 +53,7 @@ def _find_similar_public_datasets(claimed_source: str, tracer: Tracer) -> list[P
 
 
 def _find_fine_tune_comparisons(claimed_source: str, tracer: Tracer) -> list[FineTuneComparison]:
-    tracer.step(f"searching for fine-tunes on similar data: {claimed_source}")
+    tracer.debug(f"searching for fine-tunes on similar data: {claimed_source}")
     comparisons: list[FineTuneComparison] = []
 
     queries = [
@@ -107,7 +107,7 @@ def _llm_verdict(claimed_source: str, datasets: list[PublicDataset], comparisons
 
 
 def analyze_data_moat(claim: Claim, tracer: Tracer) -> DataMoatForensic:
-    tracer.step(f"data moat forensics for claim [{claim.id}]: {claim.statement[:60]}...")
+    tracer.debug(f"data moat forensics for claim [{claim.id}]: {claim.statement[:60]}...")
 
     claimed_data = claim.statement
     datasets = _find_similar_public_datasets(claimed_data, tracer)
@@ -122,5 +122,5 @@ def analyze_data_moat(claim: Claim, tracer: Tracer) -> DataMoatForensic:
         suggestion=suggestion,
     )
 
-    tracer.ok(f"data moat forensic complete: {len(datasets)} datasets, {len(comparisons)} comparisons")
+    tracer.debug(f"data moat forensic complete: {len(datasets)} datasets, {len(comparisons)} comparisons")
     return result

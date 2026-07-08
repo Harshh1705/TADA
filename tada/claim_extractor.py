@@ -39,7 +39,7 @@ def extract_claims(pages: list[tuple[int, str]], tracer: Tracer) -> list[Claim]:
     try:
         data = json.loads(cleaned)
     except json.JSONDecodeError:
-        tracer.step("  JSON parse failed, retrying with stricter instruction")
+        tracer.debug("  JSON parse failed, retrying with stricter instruction")
         raw = complete(
             deck_text + "\n\nIMPORTANT: Return ONLY a valid JSON array. No markdown, no code fences.",
             system=_SYSTEM_PROMPT,
@@ -52,7 +52,7 @@ def extract_claims(pages: list[tuple[int, str]], tracer: Tracer) -> list[Claim]:
         try:
             data = json.loads(cleaned)
         except json.JSONDecodeError:
-            tracer.step("  claim extraction failed after retry — returning empty")
+            tracer.debug("  claim extraction failed after retry — returning empty")
             return []
 
     if not isinstance(data, list):

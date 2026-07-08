@@ -70,7 +70,7 @@ def _process_single_deck(deck_path: Path, tracer: Tracer, company_name: str | No
     company = company_name or _company_name_from_filename(deck_path)
     verdicts = []
     for claim in claims:
-        tracer.step(f"claim [{claim.id}] ({claim.category}): {claim.statement[:80]}...")
+        tracer.debug(f"claim [{claim.id}] ({claim.category}): {claim.statement[:80]}...")
         evidence = ground_claim(claim, tracer, company_name=company)
         verdict = judge(claim, evidence, tracer)
         verdicts.append(verdict)
@@ -198,13 +198,13 @@ def batch(
 
     entries: list[tuple[str, list]] = []
     for pdf_path in pdfs:
-        tracer.step(f"--- processing: {pdf_path.name} ---")
+        tracer.debug(f"--- processing: {pdf_path.name} ---")
         try:
             pages = parse_deck(str(pdf_path))
             company = _company_name_from_filename(pdf_path)
             claims = extract_claims(pages, tracer)
             if not claims:
-                tracer.step(f"  no claims found, skipping")
+                tracer.debug(f"  no claims found, skipping")
                 continue
             verdicts = []
             for claim in claims:
@@ -213,7 +213,7 @@ def batch(
                 verdicts.append(verdict)
             entries.append((str(pdf_path), verdicts))
         except Exception as e:
-            tracer.step(f"  failed: {e}")
+            tracer.debug(f"  failed: {e}")
 
     if not entries:
         typer.echo("No decks produced analyzable claims.")

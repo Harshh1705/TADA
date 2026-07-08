@@ -1,3 +1,5 @@
+![tada](static/tada.png)
+
 # tada — Technical AI-Diligence Agent
 
 > **tada** reads a pitch deck (PDF), extracts its technical AI claims, grounds them against public web data, and produces an evidence-backed verdict for each claim. Optional modules verify data moats, check cross-border infrastructure compliance, and match tech stacks against your talent network.
@@ -424,3 +426,11 @@ project_tada/
 ## License
 
 Internal tool for Together Fund technical intern take-home.
+
+```
+            __            __
+         / /_____ _____/ /___ _
+        / __/ __ `/ __  / __ `/
+       / /_/ /_/ / /_/ / /_/ /
+        \__/\__,_/\__,_/\__,_/
+```

@@ -15,7 +15,7 @@ def _try_get_supabase_client():
 
 
 def cross_reference_with_foliopy(company_name: str, tracer: Tracer) -> FolioPyCrossRef:
-    tracer.step(f"cross-referencing with FolioPy for: {company_name}")
+    tracer.debug(f"cross-referencing with FolioPy for: {company_name}")
 
     client = _try_get_supabase_client()
     if not client:
@@ -44,7 +44,7 @@ def cross_reference_with_foliopy(company_name: str, tracer: Tracer) -> FolioPyCr
         )
 
     company = res.data[0]
-    tracer.ok(f"  found in FolioPy: {company['name']} ({company.get('url', 'N/A')})")
+    tracer.debug(f"  found in FolioPy: {company['name']} ({company.get('url', 'N/A')})")
 
     events: list[str] = []
     try:

@@ -67,5 +67,5 @@ def ground_claim(claim: Claim, tracer: Tracer, company_name: str | None = None) 
         if len(evidence_list) >= 3:
             break
 
-    tracer.ok(f"grounding complete: {len(evidence_list)} evidence items")
+    tracer.debug(f"grounding complete: {len(evidence_list)} evidence items")
     return evidence_list

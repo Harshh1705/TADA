@@ -133,7 +133,7 @@ def _synthetic_matches(detected_stack: list[TechStack]) -> list[ContactMatch]:
 
 
 def analyze_talent(company_name: str, tracer: Tracer) -> TalentReport:
-    tracer.step(f"talent match analysis for: {company_name}")
+    tracer.debug(f"talent match analysis for: {company_name}")
 
     stack = _detect_tech_stack(company_name, tracer)
     if not stack:
@@ -142,7 +142,7 @@ def analyze_talent(company_name: str, tracer: Tracer) -> TalentReport:
 
     matches = _match_contacts(stack)
 
-    tracer.ok(f"talent match complete: {len(stack)} technologies detected, {len(matches)} potential matches")
+    tracer.debug(f"talent match complete: {len(stack)} technologies detected, {len(matches)} potential matches")
     return TalentReport(
         company_name=company_name,
         detected_stack=stack,

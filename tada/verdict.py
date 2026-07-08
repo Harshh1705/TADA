@@ -21,10 +21,10 @@ _SYSTEM_PROMPT = (
 
 
 def judge(claim: Claim, evidence: list[Evidence], tracer: Tracer) -> Verdict:
-    tracer.step(f"judging claim [{claim.id}]: {claim.statement[:60]}...")
+    tracer.debug(f"judging claim [{claim.id}]: {claim.statement[:60]}...")
 
     if not evidence:
-        tracer.ok(f"verdict: INCONCLUSIVE — no evidence found")
+        tracer.debug(f"verdict: INCONCLUSIVE — no evidence found")
         return Verdict(
             claim=claim,
             evidence=[],
@@ -52,7 +52,7 @@ def judge(claim: Claim, evidence: list[Evidence], tracer: Tracer) -> Verdict:
     try:
         data = json.loads(cleaned)
     except json.JSONDecodeError:
-        tracer.step("  JSON parse failed, returning inconclusive")
+        tracer.debug("  JSON parse failed, returning inconclusive")
         return Verdict(
             claim=claim,
             evidence=evidence,
@@ -74,7 +74,7 @@ def judge(claim: Claim, evidence: list[Evidence], tracer: Tracer) -> Verdict:
     if v not in ("supported", "contradicted", "inconclusive"):
         v = "inconclusive"
 
-    tracer.ok(f"verdict: {v.upper()}")
+    tracer.debug(f"verdict: {v.upper()}")
     return Verdict(
         claim=claim,
         evidence=judged_evidence or evidence,
