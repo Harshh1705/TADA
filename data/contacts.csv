@@ -1,0 +1,11 @@
+name,expertise,past_companies,availability
+Sarah Chen,vLLM;PyTorch;Ray;Distributed Training;CUDA;Kubernetes,Anyscale;NVIDIA,Consulting (available 10hrs/week)
+Rahul Sharma,PyTorch;TensorFlow;MLOps;Kubernetes;AWS SageMaker,Amazon AI;Latent AI,Between jobs (available full-time from next month)
+Anika Patel,NLP;LegalAI;Fine-tuning;LLMs;Data Processing;HuggingFace,Cohere;Google Research,Open to advising (2-4hrs/month)
+Vikram Singh,AWS;GCP;Infrastructure;DevOps;CI/CD;Terraform,Netflix;Flipkart,Available for contract (20hrs/week)
+Priya Kaur,CUDA;GPU Optimization;HPC;Model Serving;Triton,NVIDIA;Microsoft Research,Available full-time
+Arjun Mehta,Ray;Distributed Systems;vLLM;Model Parallelism;PyTorch,Anyscale;LinkedIn,Consulting (available 10hrs/week)
+Neha Gupta,Regulatory Compliance;Data Privacy;DPDP;GDPR;CCPA,ThoughtWorks;Deloitte,Open to advising (weekly calls)
+Ravi Desai,NLP;Legal Tech;Fine-tuning;Data Labeling;Evaluation,HuggingFace;OpenAI,Available for part-time CTO role
+David Park,AWS Infrastructure;Kubernetes;Model Serving;CI/CD,Amazon;Stripe,Available for contract
+Maya Johnson,Product Management;AI Products;Healthcare AI;Data Strategy,Oscar Health;Healthify,Open to advising (2-4hrs/month)
