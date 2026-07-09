@@ -116,7 +116,12 @@ def show_splash():
 
     cmds = [
         ("tada run <deck.pdf>", "Standard diligence (claim extraction + verdict)"),
-        ("tada audit <deck.pdf>", "Full audit: data moat, infra, talent, cross-ref"),
+        ("   --data-moat", "Verify data moats via HuggingFace + web"),
+        ("   --infra", "Check infra compliance (BIS, DPDP, data residency)"),
+        ("   --talent", "Match tech stack against talent network"),
+        ("   --foliopy", "Cross-reference with FolioPy monitoring data"),
+        ("   --all or -v", "Run all modules / verbose per-claim trace"),
+        ("tada audit <deck.pdf>", "Shorthand for --all"),
         ("tada batch <decks_dir/>", "Batch portfolio mapping across multiple decks"),
         ("tada diff <v1.pdf> <v2.pdf>", "Compare claims across deck versions"),
         ("tada config set --help", "Configure API credentials"),
