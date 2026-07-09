@@ -2,6 +2,7 @@ from .models import InfraFinding, ComplianceFlag, InfrastructureReport
 from core.trace import Tracer
 from core.llm import complete
 from core.research import search_tavily, search_web
+from core.config import load_config
 
 
 _TECH_KEYWORDS = {
@@ -14,13 +15,17 @@ _TECH_KEYWORDS = {
 
 def _detect_infra_from_job_posts(company_name: str, tracer: Tracer) -> list[InfraFinding]:
     findings: list[InfraFinding] = []
+    cfg = load_config()
     queries = [
         f'"{company_name}" job "infrastructure" OR "ML engineer" OR "DevOps"',
         f'"{company_name}" careers GPU OR cloud OR deployment',
     ]
 
     for query in queries:
-        results = search_tavily(query, max_results=5)
+        if not cfg.tavily_api_key:
+            tracer.debug("  skipping Tavily search (no API key)")
+            break
+        results = search_tavily(query, cfg.tavily_api_key, max_results=5)
         for r in results:
             snippet = r.get("snippet", "") + r.get("content", "")
             found_tech = []
@@ -135,7 +140,7 @@ def analyze_infrastructure(company_name: str, tracer: Tracer) -> InfrastructureR
     training = [f for f in all_findings if any(kw in f.detail.lower() for kw in ["gpu", "train", "a100", "h100", "v100", "cuda", "pytorch", "tensorflow"])]
     inference = [f for f in all_findings if any(kw in f.detail.lower() for kw in ["vllm", "tgi", "ray", "deploy", "serve", "infer", "triton"])]
 
-    checklist = [f.action for f in compliance] if True else []
+    checklist = [f.recommendation for f in compliance] if True else []
     if not training and not inference:
         checklist = [
             f"Ask {company_name} about their training infrastructure (cloud provider, GPU type, region)",

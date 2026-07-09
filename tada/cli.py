@@ -271,17 +271,17 @@ def diff(
     report_path = reports_dir / f"diff-{safe_name}-{date_str}.md"
 
     lines = [
-        f"# Deck Diff: {v1_path.name} → {v2_path.name}",
+        f"# Deck Diff: {v1_path.name} \u2192 {v2_path.name}",
         f"**Generated:** {diff_report.generated_at.strftime('%Y-%m-%d %H:%M')}",
         "",
         "## Summary",
         "",
         f"| Change | Count |",
         f"|--------|-------|",
-        f"| ➕ Added | {diff_report.summary.get('added', 0)} |",
-        f"| ❌ Removed | {diff_report.summary.get('removed', 0)} |",
-        f"| ✏️ Changed | {diff_report.summary.get('changed', 0)} |",
-        f"| 🔄 Unchanged | {diff_report.summary.get('unchanged', 0)} |",
+        f"| \u2795 Added | {diff_report.summary.get('added', 0)} |",
+        f"| \u274c Removed | {diff_report.summary.get('removed', 0)} |",
+        f"| \u270f\ufe0f Changed | {diff_report.summary.get('changed', 0)} |",
+        f"| \U0001f504 Unchanged | {diff_report.summary.get('unchanged', 0)} |",
         "",
     ]
 
@@ -296,10 +296,10 @@ def diff(
     lines.append("")
     for d in diff_report.claim_diffs:
         status_emoji = {
-            "added": "➕ Added",
-            "removed": "❌ Removed",
-            "changed": "✏️ Changed",
-            "unchanged": "🔄 Unchanged",
+            "added": "\u2795 Added",
+            "removed": "\u274c Removed",
+            "changed": "\u270f\ufe0f Changed",
+            "unchanged": "\U0001f504 Unchanged",
         }.get(d.status, d.status)
         lines.append(f"### {status_emoji}: {d.statement[:80]}")
         lines.append(f"- **Category:** `{d.category}`")
@@ -315,10 +315,10 @@ def diff(
     typer.echo("=" * 50)
     typer.echo("DIFF SUMMARY")
     typer.echo("=" * 50)
-    typer.echo(f"  ➕ Added:      {diff_report.summary.get('added', 0)}")
-    typer.echo(f"  ❌ Removed:    {diff_report.summary.get('removed', 0)}")
-    typer.echo(f"  ✏️ Changed:    {diff_report.summary.get('changed', 0)}")
-    typer.echo(f"  🔄 Unchanged: {diff_report.summary.get('unchanged', 0)}")
+    typer.echo(f"  \u2795 Added:      {diff_report.summary.get('added', 0)}")
+    typer.echo(f"  \u274c Removed:    {diff_report.summary.get('removed', 0)}")
+    typer.echo(f"  \u270f\ufe0f Changed:    {diff_report.summary.get('changed', 0)}")
+    typer.echo(f"  \U0001f504 Unchanged: {diff_report.summary.get('unchanged', 0)}")
     typer.echo(f"Report: {report_path}")
 
 
